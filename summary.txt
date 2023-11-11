@@ -1,0 +1,38 @@
+Summary of the process implemented to extract stream flow values as csv files from the netcdf files.
+
+Accessing the stream flow values from the netcdf files takes relatively a longer time as compared to accessing them from zarr files. Hence, Netcdf files were converted to zarr files.
+Approach followed to is to read multiple netcdf files using xarray.openmfdataset() and store it as as xarrat dataset to access stream flow values.
+
+
+Method 1: Converting netcdf files to zarr files
+
+I am reading the netcdf files using xarray, where xarray.opendataset() function combines all the netcdf files into xarray dataset that can be later used to access the stream flow values.
+Inorder to improve time to read and convert to xarray dataset, chunking concept was adopted where each chunk is set to contain close to million elements in it.
+
+A major concern encountered with it is xarray function inability to read and convert more than 3 months of netcdf files to xarray dataset.   
+Hence, I opted to convert netcdf files to zarr files at an interval of 3 months.
+I have converted the xarray data set containing 3 months of data to zarr files using an input function to_zarr() in xarray library.
+Then I proceeded to read the streamflow variable values from the dataset for a duration of an year for the specified gid locations and stored it in CSV files.
+
+Questions in it :
+1.I couldn't figure out why I was not able to convert more than 3 months of data 
+
+
+
+Method2: Converting netcdf files to zarr files using Multizarr
+
+In this method, I have converted the netcdf files to json files. Each timestamp of the netcdf files was converted to its corresponding json file. Multizarr module from xarray is used to merge all
+these json files to a combined json file that is later referenced by xarray to create a xarray dataset.
+I later converted the xarray data set to zarr file using to_zarr() function.
+
+I used the zarr files generated using this method to read the stream flow values and generate csv files.
+
+This is one of the effective method as it takes between 6 to 15 min to generate the csv files for 1 year.
+However, when this method is extended to read and generate csv files for 2 yrs, the time exponentially grew to more than 45 min.
+
+Questions in it:
+Couldn't figure out the reason for the exponential rise in time and havent obeserved any reason to have bottle necks when converting more than an year worth of netcdf files to zarr files.
+
+
+
+
