@@ -10,17 +10,26 @@ To address these issues, several strategies were explored to enhance data access
 2. **📁 File Format Optimization**: Investigated various file formats, including Parquet, NetCDF4, and Zarr, to find the most efficient storage solution for faster data access.
 3. **🔢 Chunking Strategies**: Evaluated different chunking strategies across multiple dimensions to optimize data access and processing times.
 
-### 💡 Optimized Solution
+## 💡 Optimized Solution
 
 1. **🌐 Convert Year-Long NetCDF Files**: Consolidated multiple year-long NetCDF files into a single Zarr file using kerchunk MultiZarr function and  Dask libnraies  through conv_zarr.py script
 2. **📊 Generate_csv_files: Utilized the zarr_csv.py script to create a CSV file with columns representing the desired coordinate variables for various station IDs in the specified year
 
 
-### 🌟 Key Highlights
+## 🌟 Key Highlights
 
 - **⏱️ Reduced Access Time**: The time required to obtain a coordinate variable value for any time and location has been reduced to 11-15 minutes.
 - **📉 Efficient CSV Creation**: Created CSV files of MBs in size for specific coordinates, making preprocessing and data visualizations more manageable for researchers and users in the geospatial domain.
 
 This solution collectively streamline data handling, making it more practical for analysis and application.
 
+## 🙌 Contributors
+A special thanks to those who supported and guided me throughout this project:
+
+- **Rajesh Kalyanam** - Research Scientist ( Rosen Center for Advanced Computing center at Purdue University )
+
+
+---
+
+Thank you for visiting my project repository! If you found this work interesting, please consider leaving a star ⭐ to show your support.
 
